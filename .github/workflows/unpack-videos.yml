@@ -1,0 +1,39 @@
+name: Descomprimir videos
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Descargar repositorio
+        uses: actions/checkout@v4
+
+      - name: Descomprimir videos.zip
+        run: |
+          rm -rf videos
+          mkdir -p videos
+          unzip -o videos.zip -d videos
+          # Si el ZIP contiene una carpeta videos/ dentro, subir su contenido un nivel
+          if [ -d videos/videos ]; then
+            cp -a videos/videos/. videos/
+            rm -rf videos/videos
+          fi
+
+      - name: Guardar videos descomprimidos
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add videos
+          if git diff --cached --quiet; then
+            echo "No hay cambios que guardar"
+          else
+            git commit -m "Descomprimir videos para la galería"
+            git push
+          fi
