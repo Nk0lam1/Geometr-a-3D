@@ -1,0 +1,15 @@
+GEOMETRÍA 3D — SITIO PARA QR
+
+Este paquete contiene la galería completa de 13 construcciones GeoGebra.
+Abre index.html para verla localmente.
+
+IMPORTANTE:
+Para que el QR funcione desde cualquier teléfono, este directorio debe publicarse
+en un servidor web HTTPS. Después de publicar, el QR debe apuntar a la URL de index.html
+(o a la raíz del sitio).
+
+Contenido:
+- index.html
+- assets/
+- thumbnails/
+- videos/ (13 MP4)
